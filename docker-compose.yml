@@ -12,11 +12,10 @@ services:
     env_file:
       - .env
   app:
-    # image: rheens/mattermost-app:v9.2.0
     ports:
       - $MATTERMOST_HOST_PORT:$MATTERMOST_DOCKER_PORT
     build:
-      context: ./app
+      context: app
       args:
         - MM_VERSION=v9.2.0
         - GOOS=linux
