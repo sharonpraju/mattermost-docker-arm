@@ -76,12 +76,7 @@ if [ "$1" = 'mattermost' ]; then
   # Necessary to avoid "panic: Failed to open sql connection pq: the database system is starting up"
   sleep 1
 
-  echo $POSTGRES_USER
-  echo "POSTGRES_USER"
-  echo $POSTGRES_PASSWORD
-  echo $DB_PORT_NUMBER
-  echo $DB_HOST
-  echo "Starting mattermost123"
+  echo "Starting mattermost"
 fi
 
 exec "$@"
