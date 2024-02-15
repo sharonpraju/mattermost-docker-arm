@@ -81,7 +81,7 @@ if [ "$1" = 'mattermost' ]; then
   echo $POSTGRES_PASSWORD
   echo $DB_PORT_NUMBER
   echo $DB_HOST
-  echo "Starting mattermost"
+  echo "Starting mattermost123"
 fi
 
 exec "$@"
