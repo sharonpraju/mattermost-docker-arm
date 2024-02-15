@@ -10,7 +10,7 @@ services:
       - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - run.env
+      - .env
   app:
     # image: rheens/mattermost-app:v9.2.0
     ports:
@@ -35,4 +35,4 @@ services:
       - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - run.env
+      - \env

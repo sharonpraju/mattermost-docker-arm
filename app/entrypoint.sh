@@ -19,7 +19,7 @@ DB_PORT_NUMBER=${DB_PORT_NUMBER:-5432}
 # to set names if using a location other than default
 DB_USE_SSL=${DB_USE_SSL:-disable}
 MM_DBNAME=${MM_DBNAME:-mattermost}
-MM_CONFIG=${MM_CONFIG:-/mattermost/config/config.json}
+MM_CONFIG=${MM_CONFIG:-./mattermost/config/config.json}
 
 _1=$(echo "$1" | awk '{ s=substr($0, 0, 1); print s; }')
 if [ "$_1" = '-' ]; then
