@@ -13,6 +13,8 @@ services:
       - run.env
   app:
     # image: rheens/mattermost-app:v9.2.0
+    ports:
+      - $HOST_PORT:$MM_LISTEN_PORT
     build:
       context: app
       args:
