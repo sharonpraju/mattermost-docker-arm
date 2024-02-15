@@ -66,6 +66,10 @@ if [ "$1" = 'mattermost' ]; then
     echo "Configure database connection..."
     # URLEncode the password, allowing for special characters
     ENCODED_PASSWORD=$(printf %s "$POSTGRES_PASSWORD" | jq -s -R -r @uri)
+    echo $POSTGRES_USER
+    echo $POSTGRES_PASSWORD
+    echo $DB_PORT_NUMBER
+    echo $DB_HOST
     export MM_SQLSETTINGS_DATASOURCE="postgres://$POSTGRES_USER:$ENCODED_PASSWORD@$DB_HOST:$DB_PORT_NUMBER/$POSTGRES_DB?sslmode=$DB_USE_SSL&connect_timeout=10"
     echo "OK"
   else
