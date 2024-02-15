@@ -7,7 +7,7 @@ ENV MM_INSTALL_TYPE=docker
 # Build argument to set Mattermost edition
 ARG PUID
 ARG PGID
-ARG MM_LISTEN_PORT
+ARG MATTERMOST_DOCKER_PORT
 ARG TARGETOS
 ARG TARGETARCH
 ARG MM_VERSION
@@ -47,7 +47,7 @@ WORKDIR /mattermost
 CMD ["mattermost"]
 
 # Expose port of the container
-EXPOSE $MM_LISTEN_PORT
+EXPOSE $MATTERMOST_DOCKER_PORT
 
 # Declare volumes for mount point directories
 VOLUME ["/mattermost/data", "/mattermost/logs", "/mattermost/config", "/mattermost/plugins", "/mattermost/client/plugins"]

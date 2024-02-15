@@ -14,14 +14,14 @@ services:
   app:
     # image: rheens/mattermost-app:v9.2.0
     ports:
-      - $HOST_PORT:$MM_LISTEN_PORT
+      - $MATTERMOST_HOST_PORT:$MATTERMOST_DOCKER_PORT
     build:
       context: ./app
       args:
         - MM_VERSION=v9.2.0
         - GOOS=linux
         - GOARCH=arm64
-        - MM_LISTEN_PORT=$MM_LISTEN_PORT
+        - MATTERMOST_DOCKER_PORT=$MATTERMOST_DOCKER_PORT
         - PUID=$PUID
         - PGID=$PGID
     restart: unless-stopped

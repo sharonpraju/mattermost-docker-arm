@@ -55,9 +55,9 @@ if [ "$1" = 'postgres' ]; then
   fi
 
   # setup postgres vars based on app driven variable
-  export POSTGRES_USER=$MM_USERNAME
-  export POSTGRES_PASSWORD=$MM_PASSWORD
-  export POSTGRES_DB=$MM_DBNAME
+  export POSTGRES_USER=$POSTGRES_USER
+  export POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+  export POSTGRES_DB=$POSTGRES_DB
 
   # Update postgresql configuration
   update_conf $wal_enable
