@@ -1,43 +1,45 @@
-[![Docker Pulls](https://badgen.net/docker/pulls/rheens/mattermost-app?icon=docker&label=pulls)](https://hub.docker.com/r/rheens/mattermost-app)
-[![Docker Stars](https://badgen.net/docker/stars/rheens/mattermost-app?icon=docker&label=stars)](https://hub.docker.com/r/rheens/mattermost-app)
-![Github stars](https://badgen.net/github/stars/remiheens/mattermost-docker-arm?icon=github&label=stars)
-![Github forks](https://badgen.net/github/forks/remiheens/mattermost-docker-arm?icon=github&label=forks)
-![Github issues](https://img.shields.io/github/issues/remiheens/mattermost-docker-arm)
-
 # Mattermost server for ARM (V7 or 64)
-
-I found a GitHub repository who built tar.gz release with a sourcecode that ca be run on a ARMv7, but I've the needs to run in a docker container. 
-
-This repository contains a docker-compose.yml to run a mattermost stack onto a raspberry pi
-
-Or, you can find a bunch of script to build docker image based on https://github.com/mattermost/mattermost-server and build within GitHub Actions. 
-
-Frequently, I create new release and new docker image, so if I'm late, feel free to open a Pull Request.
-
-You just have to update ’dependabot/go.mod’ and ’.github/workflows/release.yml’
 
 ## How to run
 
-1. Rename docker-compose.yml.local to docker-compose.yml
-1. Adapt environnement values
-1. Up the stack ’docker-compose up -d’
-1. Go to http://localhost:8000
+1. Clone this repository
+2. Create a .env file from .env.sample file
+3. Modify environnement values
+4. Create `mattermost` user in host machine with User ID and Group ID 2000.
+(If there is already a user existing with 2000 as ID, better use a different ID and update the same in .env file as well.)
+```
+sudo groupadd -g 2000 mattermost
+sudo useradd -u 2000 -g 2000 -M -d /nonexistent -s /sbin/nologin mattermost
+```
+Replace 2000 with the value of PUID and PGID in .env file.
+5. Create the required directories and set their permissions.
+```
+mkdir -p ./volumes/app/mattermost/{config,data,logs,plugins,client/plugins,bleve-indexes}
+sudo chown -R 2000:2000 ./volumes
+```
+Replace 2000 with the value of PUID in .env file.
+6. Up the stack ’docker-compose up -d’
+7. Go to http://localhost:{MATTERMOST_HOST_PORT}
+
+### Optional steps
+1. To install custom plugin, custom plugin it should be enabled in volumes/app/mattermost/config/config.json (also change upload limit in the configuration if required).
+Note: most of the custom plugins currently available does not work with ARM architecture.
+2. Site URL must be set from System console in mattermost
+3. To receive notification web socket need to be implemeted in the host server (Nginx/Apache) and Push Notification Server need to be configured in System console.
+4. To hide the Preview mode banner and to receive emails from mattermost SMTP need to configured from System console.
 
 ## Troubleshootings
 
-```
-app_1  | No configuration file /mattermost/config/config.json
-app_1  | Creating a new one
-app_1  | cp: can't create '/mattermost/config/config.json': Permission denied
-app_1  | /entrypoint.sh: line 44: can't create /mattermost/config/config.json.tmp: Permission denied
-```
+For issues related with permission (Permission denied)
 
 Workaround :
 ```
-sudo chown -R $(id -u):$(id -g) ./volumes
+sudo chown -R 2000:2000 ./volumes
 docker-compose up --force-recreate
 ```
+Replace 2000 with the value of PUID in .env file.
 
 # Credits 
 
 Original repository for source code : https://github.com/SmartHoneybee/ubiquitous-memory
+Forked from : https://github.com/remiheens/mattermost-docker-arm
