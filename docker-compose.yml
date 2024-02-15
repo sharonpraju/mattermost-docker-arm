@@ -35,4 +35,4 @@ services:
       - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - \env
+      - .env
