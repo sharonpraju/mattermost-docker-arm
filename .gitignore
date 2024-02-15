@@ -7,7 +7,6 @@
 # Generated data
 volumes
 secrets/*
-docker-compose.yml
 build
 
 .wget-hsts
